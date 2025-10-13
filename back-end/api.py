@@ -30,3 +30,9 @@ def catalogo():
                         "ano": filme[3],
                         "avaliação": filme[4] })
     return {"filmes": lista}
+
+@app.post("/filmes")
+# titulo, genero, ano, nota 
+def adicionar_filmes(titulo : str, genero: str, ano: int, nota: float ):
+    f.criar_fime(titulo,genero,ano,nota)
+    return{"mensagem": "filme adicionado com sucesso"}
