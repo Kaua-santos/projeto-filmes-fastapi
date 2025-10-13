@@ -22,4 +22,3 @@ def conectar():
     except Exception as erro:
         print(f"erro de conexao{ erro}")
         return None, None
-conectar()
