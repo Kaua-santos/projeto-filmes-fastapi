@@ -36,3 +36,12 @@ def catalogo():
 def adicionar_filmes(titulo : str, genero: str, ano: int, nota: float ):
     f.criar_fime(titulo,genero,ano,nota)
     return{"mensagem": "filme adicionado com sucesso"}
+
+@app.put("/filmes/{id_filme}")
+def atualizar_filmes(id_filme,nova_avaliacao: float):
+    filme = f.buscar_movie(id_filme)
+    if filme:
+        f.atualizar_movies(id_filme, nova_avaliacao)
+        return{"mensagem": "filme atualizado com sucesso"}
+    else:
+        return{"erro": "filme não encontrado"}

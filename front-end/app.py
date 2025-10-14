@@ -8,7 +8,7 @@ s.set_page_config(page_title="gerenciador de filmes", page_icon="🎬🎥")
 
 s.title("🍟 gerenciador de filmes 🍟")
 
-menu = s.sidebar.radio('Navegação', ["Catalogo", "Adicionar filme"])
+menu = s.sidebar.radio('Navegação', ["Catalogo", "Adicionar filme", "atualizar filme"])
 
 
 if menu == "Catalogo":
@@ -38,6 +38,25 @@ elif menu == "Adicionar filme":
             s.success("filme adicionado com sucesso")
         else:
             s.error("Erro ao adicionar o filme")
+    
+elif menu == "atualizar filme":
+    s.subheader("atualizar filme")
+    id_filme = s.number_input("ID do filme a atualizar", min_value= 1, step= 1)
+    nova_avaliação = s.number_input("Nova Avalição", min_value= 0, max_value= 10)
+    if s.button("Atualizar"):
+        dados = {"nova_avaliacao": nova_avaliação}
+        response = r.put (f'{API_URL}/filmes/{id_filme}', params=dados)
+        if response.status_code == 200:
+            data = response.json()
+            if "erro" in data: 
+                s.warning(data["erro"])
+            else:
+                s.success("Filme atualizado com sucesso 😁👍")
+        else:
+            s.error("erro ao atualizar filme ❌")
+
+
+
 
 
     

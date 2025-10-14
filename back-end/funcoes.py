@@ -85,15 +85,17 @@ def deletar_movies(id_filmes,):
             cursor.close()
             conexao.close()
 
-def buscar_movies(nome_filme):
+def buscar_movie(id_filme):
     conexao, cursor = conectar()
     if conexao:
         try:
             cursor.execute(
-                
+                "SELECT * FROM movies WHERE id = %s", (id_filme,)
             )
+            return cursor.fetchone()
         except Exception as erro:
             print(f"filme nao encontrado {erro}")
-
-busca = buscar_movies("como treinar seu dragao")
-print(busca)
+            return []
+        finally:
+            cursor.close()
+            conexao.close()
