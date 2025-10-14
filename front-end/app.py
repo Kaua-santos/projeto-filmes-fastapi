@@ -8,7 +8,8 @@ s.set_page_config(page_title="gerenciador de filmes", page_icon="🎬🎥")
 
 s.title("🍟 gerenciador de filmes 🍟")
 
-menu = s.sidebar.radio('Navegação', ["Catalogo"])
+menu = s.sidebar.radio('Navegação', ["Catalogo", "Adicionar filme"])
+
 
 if menu == "Catalogo":
     s.subheader("🎥 Todos os filmes 🎥")
@@ -18,7 +19,25 @@ if menu == "Catalogo":
         if filmes:
             for filme in filmes:
                 s.write(f" **{filme['titulo']}** ({filme['ano']}) - {filme['genero']} - 🌟 {filme['avaliação']} ")
-            else:
-                s.info("nenhum filme encontrado")
+        else:
+            s.info("nenhum filme encontrado")
     else:
         s.error("erro ao conectar com a API")
+
+elif menu == "Adicionar filme":
+    s.subheader('➕ Adicionar filme')
+    titulo = s.text_input("titulo do filme")
+    genero = s.text_input("Genero")
+    ano = s.number_input("Ano de lançamento", min_value=1900, max_value=2100)
+    avaliaçao = s.number_input("Avaliação de (0 a 10)", min_value=0, max_value=10, step=1)
+
+    if s.button("Salvar filme"):
+        params = {"titulo": titulo, "genero":genero, "ano": ano, "nota": avaliaçao}
+        response = r.post(f"{API_URL}/filmes", params=params)
+        if response.status_code == 200:
+            s.success("filme adicionado com sucesso")
+        else:
+            s.error("Erro ao adicionar o filme")
+
+
+    

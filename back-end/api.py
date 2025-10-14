@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import funcoes as f
 
-# Rodar fastapi = python -m uvicorn api:app -- reload
+# Rodar fastapi = python -m uvicorn api:app --reload
 
 # testar a s rotas fastapi 
 # /docs > documentação Swagger 
