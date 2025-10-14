@@ -45,3 +45,12 @@ def atualizar_filmes(id_filme,nova_avaliacao: float):
         return{"mensagem": "filme atualizado com sucesso"}
     else:
         return{"erro": "filme não encontrado"}
+    
+@app.delete("/filmes/{id_filme}")
+def deletar_filme(id_filme: int):
+    filme = f.buscar_movie(id_filme)
+    if filme:
+        f.deletar_movies(id_filme)
+        return{"mensagem": "Filme deleteado com sucesso"}
+    else:
+        return{"erro": "filme não encontrado"}

@@ -8,7 +8,7 @@ s.set_page_config(page_title="gerenciador de filmes", page_icon="🎬🎥")
 
 s.title("🍟 gerenciador de filmes 🍟")
 
-menu = s.sidebar.radio('Navegação', ["Catalogo", "Adicionar filme", "atualizar filme"])
+menu = s.sidebar.radio('Navegação', ["Catalogo", "Adicionar filme", "atualizar filme", "deletar filme"])
 
 
 if menu == "Catalogo":
@@ -55,8 +55,10 @@ elif menu == "atualizar filme":
         else:
             s.error("erro ao atualizar filme ❌")
 
-
-
+elif menu == "deletar filme":
+    s.subheader("deletar filme")
+    id_filme = s.number_input("ID do filme para deletar", min_value= 1, step= 1)
+    
 
 
     
